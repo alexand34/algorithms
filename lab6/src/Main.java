@@ -92,6 +92,15 @@ class Node {
 class BinaryTree {
     static Node root;
 
+    static int minvalue(Node node) {
+        Node current = node;
+
+        while (current.left != null) {
+            current = current.left;
+        }
+        return (current.data);
+    }
+
     Node sortedArrayToBST(int arr[], int start, int end) {
         if (start > end) {
             return null;
@@ -112,6 +121,7 @@ class BinaryTree {
         Arrays.sort(arr);
         root = tree.sortedArrayToBST(arr, 0, n - 1);
         BTreePrinter.printNode(root);
+        System.out.println("smallest element: " + minvalue(root));
     }
 }
  
