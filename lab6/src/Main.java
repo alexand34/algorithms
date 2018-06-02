@@ -30,7 +30,7 @@ class BTreePrinter {
             }
             BTreePrinter.printWhitespaces(betweenSpaces);
         }
-        System.out.println("");
+        System.out.println(" ");
 
         for (int i = 1; i <= endgeLines; i++) {
             for (int j = 0; j < nodes.size(); j++) {
@@ -116,10 +116,9 @@ class BinaryTree {
 
     public static void main(String[] args) {
         BinaryTree tree = new BinaryTree();
-        int arr[] = new int[]{5, 3, 3, 22, 11, 6, 7};
-        int n = arr.length;
+        int arr[] = new int[]{2, 5, 2, 5, 2, 2, 1};
         Arrays.sort(arr);
-        root = tree.sortedArrayToBST(arr, 0, n - 1);
+        root = tree.sortedArrayToBST(arr, 0, arr.length - 1);
         BTreePrinter.printNode(root);
         System.out.println("smallest element: " + minvalue(root));
     }
