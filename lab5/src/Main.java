@@ -4,12 +4,11 @@ public class Main {
         BinaryTree tree = new BinaryTree();
 
         tree = tree.createBinaryTree();
-        tree.traverseLevelOrder();
-
+        BTreePrinter.printNode(tree.root);
         System.out.println();
         tree.getNodeValue("ED");
         System.out.println("Node to delete: " + tree.NodeValue);
         tree.delete(tree.NodeValue);
-        tree.traverseLevelOrder();
+        BTreePrinter.printNode(tree.root);
     }
 }
