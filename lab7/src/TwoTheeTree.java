@@ -1,7 +1,3 @@
-import java.util.Collection;
-import java.util.function.Predicate;
-
-
 public class TwoTheeTree<T extends Comparable<T>> {
 
     private Node root;
@@ -18,15 +14,6 @@ public class TwoTheeTree<T extends Comparable<T>> {
         this.root = new Node();
 
         size = 0;
-    }
-
-    public TwoTheeTree(Collection<T> elements) {
-
-        this.root = new Node();
-
-        this.size = 0;
-
-        elements.forEach(this::add);    // Java 8
     }
 
     public boolean add(T element) {
@@ -149,32 +136,6 @@ public class TwoTheeTree<T extends Comparable<T>> {
         }
     }
 
-    public T find(T element) {
-
-        return findI(root, element);
-    }
-
-    private T findI(Node current, T element) {
-        T found = null;
-        if (current != null) {
-            if (current.leftElement != null && current.leftElement.equals(element)) found = current.leftElement;
-            else {
-                if (current.rightElement != null && current.rightElement.equals(element)) found = current.rightElement;
-                else {
-                    if (current.leftElement.compareTo(element) == ROOT_IS_BIGGER) {
-                        found = findI(current.left, element);
-                    } else if (current.right == null || current.rightElement.compareTo(element) == ROOT_IS_BIGGER) {
-                        found = findI(current.mid, element);
-                    } else if (current.rightElement.compareTo(element) == ROOT_IS_SMALLER) {
-                        found = findI(current.right, element);
-                    } else return null;
-                }
-            }
-        }
-
-        return found;
-    }
-
     public void inOrder() {
 
         if (!isEmpty()) {
@@ -208,35 +169,6 @@ public class TwoTheeTree<T extends Comparable<T>> {
         }
     }
 
-    public void inOrder(Predicate<T> predicate) {
-
-        if (!isEmpty()) {
-
-            inOrderI(root, predicate);    // Immersion
-        } else System.out.println("The tree is empty");
-    }
-
-    private void inOrderI(Node current, Predicate<T> predicate) {
-
-        if (current != null) {
-            if (current.isLeaf()) {
-                if (predicate.test(current.getLeftElement())) System.out.println(current.getLeftElement().toString());
-                if (current.getRightElement() != null && predicate.test(current.getRightElement())) {
-                    System.out.println(current.getRightElement().toString());
-                }
-            } else {
-                inOrderI(current.getLeftSon(), predicate);
-                if (predicate.test(current.getLeftElement())) System.out.println(current.getLeftElement().toString());
-                inOrderI(current.getMidSon(), predicate);
-                if (current.getRightElement() != null) {
-                    if (!current.isLeaf() && predicate.test(current.getRightElement()))
-                        System.out.println(current.getRightElement().toString());
-                    inOrderI(current.getRightSon(), predicate);
-                }
-            }
-        }
-    }
-
     public boolean isEmpty() {
 
         if (root == null) return true;
@@ -244,22 +176,6 @@ public class TwoTheeTree<T extends Comparable<T>> {
         if (root.getLeftElement() == null) return true;
 
         return false;
-    }
-
-    private void preOrderI(Node current) {
-
-        if (current != null) {
-
-            System.out.println(current.leftElement.toString());
-            preOrderI(current.left);
-            preOrderI(current.mid);
-
-            if (current.rightElement != null) {
-
-                System.out.println(current.rightElement.toString());
-                preOrderI(current.right);
-            }
-        }
     }
 
     public boolean remove(T element) {
@@ -554,9 +470,5 @@ public class TwoTheeTree<T extends Comparable<T>> {
                 }
             }
         }
-
-
-
-        /* Shouldn't be other cases in 2-3 trees */
     }
 }
